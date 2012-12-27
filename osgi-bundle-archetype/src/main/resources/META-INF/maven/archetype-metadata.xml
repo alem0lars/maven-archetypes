@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~ Copyright (c) 2012.
+  ~ This file is part of osgi-bundle-archetype.
+  ~ osgi-bundle-archetype is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ at your option) any later version.
+  ~ osgi-bundle-archetype is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with osgi-bundle-archetype.  If not, see <http://www.gnu.org/licenses/>.
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<archetype-descriptor name="basic">
+
+  <fileSets>
+
+    <fileSet filtered="true" packaged="false">
+      <directory/>
+      <includes>
+        <include>.gitignore</include>
+      </includes>
+    </fileSet>
+
+    <fileSet filtered="true" packaged="true">
+      <directory>src/test/java</directory>
+    </fileSet>
+    <fileSet filtered="true" packaged="true">
+      <directory>src/test/scala</directory>
+    </fileSet>
+    <fileSet filtered="true" packaged="false">
+      <directory>src/test/resources</directory>
+    </fileSet>
+
+    <fileSet filtered="true" packaged="true">
+      <directory>src/main/java</directory>
+    </fileSet>
+    <fileSet filtered="true" packaged="true">
+      <directory>src/main/scala</directory>
+    </fileSet>
+    <fileSet filtered="true" packaged="false">
+      <directory>src/main/resources</directory>
+    </fileSet>
+    <fileSet filtered="true" packaged="false">
+      <directory>src/main/scripts</directory>
+      <includes>
+        <include>**/*</include>
+      </includes>
+    </fileSet>
+
+    <fileSet filtered="true" packaged="false">
+      <directory>src/models</directory>
+    </fileSet>
+
+    <fileSet filtered="true" packaged="false">
+      <directory>src/site</directory>
+      <includes>
+        <include>site.xml</include>
+      </includes>
+    </fileSet>
+    <fileSet filtered="true" packaged="false">
+      <directory>src/site/resources/models</directory>
+    </fileSet>
+    <fileSet filtered="true" packaged="false">
+      <directory>src/site/apt</directory>
+      <includes>
+        <include>overview.apt.vm</include>
+      </includes>
+    </fileSet>
+
+  </fileSets>
+
+  <requiredProperties>
+
+    <requiredProperty key="projectName"/>
+    <requiredProperty key="projectUrl">
+      <defaultValue>http://projects.${organizationDomain}/${artifactId}</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="projectNamespace"/>
+    <requiredProperty key="projectYear"/>
+    <requiredProperty key="projectDesc"/>
+    <requiredProperty key="projectIssueId">
+      <defaultValue>prj-${artifactId}</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="projectIssueSystem">
+      <defaultValue>Issues @ ${organizationName}</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="projectIssueUrl">
+      <defaultValue>http://issues.projects.${organizationDomain}</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="projectScmUrl">
+      <defaultValue>http://repo.projects.${organizationDomain}</defaultValue>
+    </requiredProperty>
+    <requiredProperty key="projectScmDevConn"/>
+    <requiredProperty key="projectScmConn">
+      <defaultValue>${projectScmDevConn}</defaultValue>
+    </requiredProperty>
+
+    <requiredProperty key="authorName"/>
+    <requiredProperty key="authorEmail"/>
+    <requiredProperty key="authorUrl"/>
+    <requiredProperty key="authorTimezone">
+      <defaultValue>+0</defaultValue>
+    </requiredProperty>
+
+    <requiredProperty key="organizationName"/>
+    <requiredProperty key="organizationDomain"/>
+    <requiredProperty key="organizationUrl">
+      <defaultValue>http://${organizationDomain}</defaultValue>
+    </requiredProperty>
+
+  </requiredProperties>
+
+</archetype-descriptor>

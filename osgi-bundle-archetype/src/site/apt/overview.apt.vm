@@ -1,0 +1,18 @@
+${project.name} Overview
+
+================================================================================
+
+* The fundamental idea
+
+  Create a new jvm-based project with OSGi support.
+
+================================================================================
+
+* Disable additional languages
+
+  This archetype enables the use of the following languages:
+
+  * Scala: To disable the Scala support remove the directory src/main/scala
+    and src/test/scala.
+
+================================================================================

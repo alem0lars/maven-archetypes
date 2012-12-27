@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~ Copyright (c) 2012.
+  ~ This file is part of osgi-parent-archetype.
+  ~ osgi-parent-archetype is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ at your option) any later version.
+  ~ osgi-parent-archetype is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with osgi-parent-archetype.  If not, see <http://www.gnu.org/licenses/>.
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <properties>
+    <custom.subprojectArchetypeId>${subprojectArchetypeId}</custom.subprojectArchetypeId>
+    <custom.subprojectArchetypeGroupId>${subprojectAchetypeGroupId}</custom.subprojectArchetypeGroupId>
+
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  </properties>
+
+  <groupId>${groupId}</groupId>
+  <artifactId>${artifactId}</artifactId>
+  <name>${projectName}</name>
+  <url>${projectUrl}</url>
+  <description>${projectDesc}</description>
+  <inceptionYear>${projectYear}</inceptionYear>
+
+  <organization>
+    <name>${organizationName}</name>
+    <url>${organizationUrl}</url>
+  </organization>
+
+  <developers>
+    <developer>
+      <name>${authorName}</name>
+      <email>${authorEmail}</email>
+      <url>${authorUrl}</url>
+      <timezone>${authorTimezone}</timezone>
+      <roles>
+        <role>Analyst</role>
+        <role>Designer</role>
+        <role>Developer</role>
+        <role>Tester</role>
+      </roles>
+    </developer>
+  </developers>
+
+  <licenses>
+    <license>
+      <name>GNU General Public License, Version 3</name>
+      <url>http://www.gnu.org/licenses/gpl-3.0.txt</url>
+      <distribution>http://www.gnu.org/licenses/gpl-3.0.txt</distribution>
+      <comments>This is a Free software. Free software is a matter of liberty, not price.
+        To understand the concept, you should think of "free" as in "free speech",
+        not as in "free beer".</comments>
+    </license>
+  </licenses>
+
+  <issueManagement>
+    <system>${projectIssueSystem}</system>
+    <url>${projectIssueUrl}</url>
+  </issueManagement>
+
+  <scm>
+    <connection>scm:${projectScmConn}</connection>
+    <developerConnection>scm:${projectScmDevConn}</developerConnection>
+    <url>${projectScmUrl}</url>
+  </scm>
+
+  <version>${version}</version>
+  <packaging>jar</packaging>
+
+</project>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~ Copyright (c) 2012.
+  ~ This file is part of osgi-bundle-archetype.
+  ~ osgi-bundle-archetype is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ at your option) any later version.
+  ~ osgi-bundle-archetype is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with osgi-bundle-archetype.  If not, see <http://www.gnu.org/licenses/>.
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <properties>
+    <github.global.server>github</github.global.server>
+
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  </properties>
+
+  <groupId>org.nextreamlabs</groupId>
+  <artifactId>osgi-bundle-archetype</artifactId>
+  <name>OSGi Bundle Archetype</name>
+  <url>https://molarialessandro.info/maven-archetypes/osgi-bundle-archetype</url>
+  <description>
+    Archetype used to create new osgi bundles.
+  </description>
+  <inceptionYear>2012</inceptionYear>
+
+  <developers>
+    <developer>
+      <name>Alessandro Molari</name>
+      <email>molari.alessandro@gmail.com</email>
+      <url>http://molarialessandro.info</url>
+      <timezone>+1</timezone>
+      <roles>
+        <role>Analyst</role>
+        <role>Designer</role>
+        <role>Developer</role>
+        <role>Tester</role>
+      </roles>
+    </developer>
+  </developers>
+
+  <licenses>
+    <license>
+      <name>GNU General Public License, Version 3</name>
+      <url>http://www.gnu.org/licenses/gpl-3.0.txt</url>
+      <distribution>http://www.gnu.org/licenses/gpl-3.0.txt</distribution>
+      <comments>This is a Free software. Free software is a matter of liberty, not price.
+        To understand the concept, you should think of "free" as in "free speech",
+        not as in "free beer".</comments>
+    </license>
+  </licenses>
+
+  <issueManagement>
+    <system>Issues @ Nextreamlabs</system>
+    <url>https://github.com/alem0lars/maven-archetypes/issues</url>
+  </issueManagement>
+
+  <scm>
+    <connection>scm:git://github.com/alem0lars/maven-archetypes.git</connection>
+    <developerConnection>scm:git@github.com:alem0lars/maven-archetypes.git</developerConnection>
+    <url>https://github.com/alem0lars/maven-archetypes</url>
+  </scm>
+
+  <version>0.1</version>
+  <packaging>jar</packaging>
+
+  <build>
+    <directory>${project.basedir}/out</directory>
+    <outputDirectory>${project.build.directory}/classes</outputDirectory>
+    <finalName>${project.artifactId}-${project.version}</finalName>
+    <testOutputDirectory>${project.build.directory}/test-classes</testOutputDirectory>
+
+    <plugins>
+      <plugin> <!-- Github - Upload the packages -->
+        <groupId>com.github.github</groupId>
+        <artifactId>downloads-maven-plugin</artifactId>
+        <version>0.6</version>
+        <configuration>
+          <description>${project.version} release of ${project.name}</description>
+          <override>true</override>
+          <includeAttached>true</includeAttached>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>upload</goal>
+            </goals>
+            <phase>install</phase>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin> <!-- Github - Upload the site -->
+        <groupId>com.github.github</groupId>
+        <artifactId>site-maven-plugin</artifactId>
+        <version>0.7</version>
+        <configuration>
+          <message>Creating site for ${project.version}</message>
+          <path>${project.artifactId}</path>
+          <merge>true</merge>
+        </configuration>
+        <executions>
+          <execution>
+            <goals>
+              <goal>site</goal>
+            </goals>
+            <phase>site</phase>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

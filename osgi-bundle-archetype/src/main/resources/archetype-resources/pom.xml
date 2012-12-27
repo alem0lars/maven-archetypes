@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~ Copyright (c) 2012.
+  ~ This file is part of osgi-bundle-archetype.
+  ~ osgi-bundle-archetype is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ at your option) any later version.
+  ~ osgi-bundle-archetype is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with osgi-bundle-archetype.  If not, see <http://www.gnu.org/licenses/>.
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+  </properties>
+
+  <groupId>${groupId}</groupId>
+  <artifactId>${artifactId}</artifactId>
+  <name>${projectName}</name>
+  <url>${projectUrl}</url>
+  <description>${projectDesc}</description>
+  <inceptionYear>${projectYear}</inceptionYear>
+
+  <organization>
+    <name>${organizationName}</name>
+    <url>${organizationUrl}</url>
+  </organization>
+
+  <developers>
+    <developer>
+      <name>${authorName}</name>
+      <email>${authorEmail}</email>
+      <url>${authorUrl}</url>
+      <timezone>${authorTimezone}</timezone>
+      <roles>
+        <role>Analyst</role>
+        <role>Designer</role>
+        <role>Developer</role>
+        <role>Tester</role>
+      </roles>
+    </developer>
+  </developers>
+
+  <licenses>
+    <license>
+      <name>GNU General Public License, Version 3</name>
+      <url>http://www.gnu.org/licenses/gpl-3.0.txt</url>
+      <distribution>http://www.gnu.org/licenses/gpl-3.0.txt</distribution>
+      <comments>This is a Free software. Free software is a matter of liberty, not price.
+        To understand the concept, you should think of "free" as in "free speech",
+        not as in "free beer".</comments>
+    </license>
+  </licenses>
+
+  <issueManagement>
+    <system>${projectIssueSystem}</system>
+    <url>${projectIssueUrl}</url>
+  </issueManagement>
+
+  <scm>
+    <connection>scm:${projectScmConn}</connection>
+    <developerConnection>scm:${projectScmDevConn}</developerConnection>
+    <url>${projectScmUrl}</url>
+  </scm>
+
+  <version>${version}</version>
+  <packaging>bundle</packaging>
+
+  <dependencies>
+
+    <dependency> <!-- TestNG -->
+      <groupId>org.testng</groupId>
+      <artifactId>testng</artifactId>
+      <version>6.5.2</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency> <!-- Felix - OSGi Core -->
+      <groupId>org.apache.felix</groupId>
+      <artifactId>org.osgi.core</artifactId>
+      <version>1.4.0</version>
+    </dependency>
+
+  </dependencies>
+
+  <profiles>
+    <profile> <!-- Scala -->
+      <id>scala</id>
+      <activation>
+        <file><exists>src/main/scala</exists></file>
+      </activation>
+      <dependencies>
+        <dependency>
+          <groupId>org.scala-lang</groupId>
+          <artifactId>scala-library</artifactId>
+          <version>${scalaVersion}</version>
+        </dependency>
+      </dependencies>
+      <build>
+        <plugins>
+          <plugin> <!-- Compile scala code -->
+            <groupId>org.scala-tools</groupId>
+            <artifactId>maven-scala-plugin</artifactId>
+            <version>2.9.1</version>
+            <executions>
+              <execution>
+                <id>compile</id>
+                <phase>compile</phase>
+                <goals>
+                  <goal>compile</goal>
+                </goals>
+              </execution>
+              <execution>
+                <id>test-compile</id>
+                <phase>test-compile</phase>
+                <goals>
+                  <goal>testCompile</goal>
+                </goals>
+              </execution>
+              <execution>
+                <phase>process-resources</phase>
+                <goals>
+                  <goal>compile</goal>
+                </goals>
+              </execution>
+            </executions>
+            <configuration>
+              <args>
+                <arg>-make:transitivenocp</arg>
+                <arg>-dependencyfile</arg>
+                <arg>${project.build.directory}/.scala_dependencies</arg>
+              </args>
+              <jvmArgs>
+                <jvmArg>-Xms64m</jvmArg>
+                <jvmArg>-Xmx1024m</jvmArg>
+              </jvmArgs>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
+  <build>
+    <directory>${project.basedir}/out</directory>
+    <outputDirectory>${project.build.directory}/classes</outputDirectory>
+    <testOutputDirectory>${project.build.directory}/test-classes</testOutputDirectory>
+
+    <resources>
+      <resource> <!-- Allow the presence of the src resources -->
+        <directory>${project.basedir}/src/main/resources</directory>
+      </resource>
+    </resources>
+
+    <testResources> <!-- Allow the presence of the test resources -->
+      <testResource>
+        <directory>${project.basedir}/src/test/resources</directory>
+      </testResource>
+    </testResources>
+
+    <plugins>
+
+      <plugin> <!-- Allow to use Java specific version -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.0</version>
+        <configuration>
+          <source>1.${javaVersion}</source>
+          <target>1.${javaVersion}</target>
+        </configuration>
+      </plugin>
+
+      <plugin> <!-- Bundle generation -->
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <version>2.3.7</version>
+        <extensions>true</extensions>
+        <configuration>
+          <instructions>
+            <Export-Package>${projectNamespace}.api.*;version="${project.version}"</Export-Package>
+            <Private-Package>${projectNamespace}.internal.*</Private-Package>
+            <Bundle-Activator>${projectNamespace}.internal.Activator</Bundle-Activator>
+            <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+            <Bundle-Version>${project.version}</Bundle-Version>
+          </instructions>
+        </configuration>
+      </plugin>
+
+      <plugin> <!-- Plugin for tests -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.9</version>
+        <inherited>true</inherited>
+        <configuration>
+          <forkMode>once</forkMode>
+          <reportFormat>html</reportFormat>
+          <reportFormat>xml</reportFormat>
+        </configuration>
+      </plugin>
+
+      <plugin> <!-- Source plugin (generate source jar) -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>2.2.1</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin> <!-- Javadoc plugin (generate javadoc jar) -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.9</version>
+        <configuration>
+          <show>public</show>
+        </configuration>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin> <!-- PlantUML plugin -->
+        <groupId>com.github.jeluard</groupId>
+        <artifactId>maven-plantuml-plugin</artifactId>
+        <version>7940</version>
+        <configuration>
+          <verbose>false</verbose>
+          <format>svg</format>
+          <outputInSourceDirectory>false</outputInSourceDirectory>
+          <outputDirectory>${project.build.directory}/models</outputDirectory>
+          <sourceFiles>
+            <directory>${basedir}</directory>
+            <includes>
+              <include>src/models/**/*.puml</include>
+            </includes>
+          </sourceFiles>
+        </configuration>
+      </plugin>
+
+      <plugin> <!-- Additional compile steps -->
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.2.1</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <executable>${basedir}/src/main/scripts/compile_odg.rb</executable>
+          <environmentVariables>
+            <OUT_DIR>${project.build.directory}/models</OUT_DIR>
+            <SRC_DIR>${basedir}/src/models</SRC_DIR>
+          </environmentVariables>
+        </configuration>
+      </plugin>
+
+      <plugin> <!-- Ant tasks -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>1.7</version>
+        <executions>
+          <execution> <!-- Setup the output directories -->
+            <id>setupOutputDir</id>
+            <phase>clean</phase>
+            <configuration>
+              <tasks>
+                <mkdir dir="${project.build.directory}/models"/>
+              </tasks>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+          <execution> <!-- Prepare the resources for the site -->
+            <id>setupResourcesForSite</id>
+            <phase>pre-site</phase>
+            <configuration>
+              <tasks>
+                <mkdir dir="${project.basedir}/src/site/resources/models"/>
+                <copy todir="${project.basedir}/src/site/resources/models">
+                  <fileset dir="${project.build.directory}/models"/>
+                </copy>
+              </tasks>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+    </plugins>
+  </build>
+
+  <reporting>
+    <outputDirectory>${project.build.directory}/site</outputDirectory>
+
+    <plugins>
+
+      <plugin> <!-- Enable Tests reports -->
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>surefire-report-maven-plugin</artifactId>
+        <version>2.0-beta-1</version>
+        <inherited>true</inherited>
+      </plugin>
+
+      <plugin> <!-- Enable JavaDOC reports -->
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>2.9</version>
+        <configuration>
+          <show>public</show>
+        </configuration>
+      </plugin>
+
+    </plugins>
+
+  </reporting>
+
+</project>
